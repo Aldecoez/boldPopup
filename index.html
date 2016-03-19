@@ -1,0 +1,34 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>boldPopup</title>
+  <meta name="description" content="boldPopup - javaScript plugin">
+  <meta name="author" content="boldPopup">
+
+
+</head>
+
+<body>
+BOLD POPUP HTML TEST  
+
+	<!-- JS TEMPLATES -->
+<script type="template/text" id="basicTemplate">
+	<div class="boldPopup">
+		<h2>boldPopup - basic template</h2>
+		<p>basic paragraph with var mainText {{mainText}}</p>
+		<button id="{{buttonId}}">button with event alert by id</button>
+		<button id="{{buttonIdDwa}}">drugi</button>
+	</div>
+</script>
+
+	<!-- JS LIBS -->
+	<script src="lib/handlebars-v4.0.5.min.js"></script>
+
+	<!-- JS SRC -->
+  	<script src="src/js/boldpopup-v0.1.js"></script>
+  	<script src="src/js/app.js"></script>
+</body>
+</html>
