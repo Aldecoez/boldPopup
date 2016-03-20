@@ -1,6 +1,5 @@
 // CLEAR JS EXTEND FUNCTION
-extend = function () {
-    console.log(arguments)
+boldExtend = function () {
     // Variables
     var extended = {},
     	deep = false;

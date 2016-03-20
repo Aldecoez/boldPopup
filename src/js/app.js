@@ -13,7 +13,7 @@ event2 = {
 events.push(event);
 events.push(event2);
 
-
-boldPopup.loadTemplate({ id: "basicTemplate", name: "Basic Template", data : {mainText: "test tekstu", buttonId: "testButton", buttonIdDwa: "drugiKlikacz"}, events: events });
+var temp = boldTemplate.loadTemplate({ id: "basicTemplate", name: "Basic Template", data : {mainText: "test tekstu", buttonId: "testButton", buttonIdDwa: "drugiKlikacz"}, events: events });
+console.log(temp)
 
 boldDebug.show();
