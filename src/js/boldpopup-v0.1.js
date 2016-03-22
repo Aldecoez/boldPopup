@@ -21,7 +21,6 @@ function Template (options) {
 }
 
 Template.prototype.constructor = function() {
-	console.log(arguments.id)
 	templates[instanace.id] = this;
 };
 
@@ -39,7 +38,7 @@ var templateFactory = function (options) {
 			autoBind: true
 		},
 		_this = this;
-		
+
 	generateTemplateId = function () {
 		var templateCount = 0,
 			template;

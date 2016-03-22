@@ -14,6 +14,7 @@ events.push(event);
 events.push(event2);
 
 var temp = boldTemplate.loadTemplate({ id: "basicTemplate", name: "Basic Template", data : {mainText: "test tekstu", buttonId: "testButton", buttonIdDwa: "drugiKlikacz"}, events: events });
-console.log(temp)
+var pop = boldPopup.create({id:'ed'})
+console.log(boldPopup);
 
 boldDebug.show();
