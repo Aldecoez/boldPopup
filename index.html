@@ -1,0 +1,94 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>boldPopup</title>
+    <meta name="description" content="boldPopup - javaScript plugin">
+    <meta name="author" content="boldPopup">
+
+    <link href='//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css' rel='stylesheet' type='text/css' media='all' />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css' />
+    <link href='css/style.css' rel="stylesheet" type='text/css' media='all' />
+
+    <!-- JS LIBS -->
+    <script src="lib/handlebars-v4.0.5.min.js"></script>
+
+    <!-- JS SRC -->
+    <script src="js/extend.js"></script>
+    <script src="js/debug.js"></script>
+    <script src="src/js/boldpopup-v0.1.js"></script>
+    <script src="js/boldPopup.js"></script>
+    <script src="src/js/app.js"></script>
+
+        
+</head>
+
+<body>
+
+    
+<!-- JS TEMPLATES -->
+<script type="template/text" id="basicTemplate">
+    <div class="boldPopup">
+            <h2>boldPopup - basic template</h2>
+            <p>basic paragraph with var mainText {{mainText}}</p>
+            <button id="{{buttonId}}">button with event alert by id</button>
+            <button id="{{buttonIdDwa}}">drugi</button>
+    </div>
+</script>
+
+        
+        
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1><strong>Szkolenia Front-end</strong></h1>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="tile red">
+              <h3 class="title">Okienkowy popup</h3>
+              <p>Po kliknieciu dodaję popup do zielonego kafla.</p>
+              <button>Wybierz mnie</button>
+            </div>
+          </div>
+            
+          <div class="col-sm-4">
+            <div class="tile purple">
+              <h3 class="title">Pełny popup</h3>
+              <p>Po kliknieciu dodaję popup do body.</p>
+              <button>Wybierz mnie</button>
+            </div>
+          </div>
+            
+          <div class="col-sm-4">
+            <div class="tile orange">
+              <h3 class="title">Pełny preloader</h3>
+              <p>Po kliknieciu dodaję preloader do body.</p>
+              <button>Wybierz mnie</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="tile green">
+              <h3 class="title">Zasłoni mnie czerwony :(</h3>
+              <p>Vestibulum feugiat malesuada enim, eget vestibulum nibh imperdiet vitae. Proin vel enim est. Pellentesque blandit libero ac sem imperdiet, et rhoncus metus placerat. Duis velit libero, faucibus nec faucibus non, feugiat eget lorem. Morbi accumsan felis in urna commodo facilisis. In quis nibh orci. Nulla luctus metus viverra pretium sodales. Quisque faucibus, elit nec aliquam tristique, risus ipsum ornare ex, non faucibus lectus mi et erat. Proin sollicitudin pharetra augue, eu vulputate lorem pretium ac. Maecenas bibendum nulla id placerat scelerisque. Aliquam erat volutpat. Quisque id mattis elit. Praesent eleifend, lorem vel ultricies posuere, lectus augue commodo est, vitae fermentum ipsum nulla a diam. Vivamus in sapien semper, laoreet tellus ac, mattis neque. Suspendisse egestas in eros vel fringilla.</p>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="tile blue">
+              <h3 class="title">Okienkowy preloader</h3>
+              <p>Po kliknieciu dodaję preloader na sobie</p>
+              <button>Wybierz mnie</button>
+              <p>Vestibulum feugiat malesuada enim, eget vestibulum nibh imperdiet vitae. Proin vel enim est. Pellentesque blandit libero ac sem imperdiet, et rhoncus metus placerat. Duis velit libero, faucibus nec faucibus non, feugiat eget lorem. Morbi accumsan felis in urna commodo facilisis. In quis nibh orci. Nulla luctus metus viverra pretium sodales. Lectus augue commodo est, vitae fermentum ipsum nulla a diam. Vivamus in sapien semper, laoreet tellus ac, mattis neque. Suspendisse egestas in eros vel fringilla.</p>
+            </div>
+          </div>    
+        </div>
+    </div>
+
+</body>
+</html>
