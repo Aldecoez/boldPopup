@@ -31,6 +31,9 @@ Template.prototype.setParam = function(key, val) {
 Template.prototype.getSource = function () {
 	return this.source;
 };
+Template.prototype.getHTML = function () {
+	return this.html;
+};
 
 var templateFactory = function (options) {
 	var defaultOptions = {

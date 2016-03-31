@@ -14,7 +14,13 @@ events.push(event);
 events.push(event2);
 
 var temp = boldTemplate.loadTemplate({ id: "basicTemplate", name: "Basic Template", data : {mainText: "test tekstu", buttonId: "testButton", buttonIdDwa: "drugiKlikacz"}, events: events });
-var pop = boldPopup.create({id:'ed'})
-console.log(boldPopup);
+var pop = boldPopup.create({
+    'id':'ed',
+    'prependTo': 'body',
+    'html': temp.getHTML()
+});
 
 boldDebug.show();
+document.querySelector("#startTheParty").onclick = function(){
+    pop.show();
+}
