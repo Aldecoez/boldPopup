@@ -19,7 +19,11 @@ var pop = boldPopup.create({
     'prependTo': 'body',
     'html': temp.getHTML()
 });
-
+var pop2 = boldPopup.create({
+    'id':'ed2',
+    'prependTo': 'body',
+    'html': temp.getHTML()
+});
 boldDebug.show();
 document.querySelector("#startTheParty").onclick = function(){
     pop.show();
