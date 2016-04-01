@@ -24,40 +24,41 @@ var boldPopup = (function(){
         return popups[name];
     };
 
-    var Popup = (function () {
-    	var _that = this;
-        this.options ={};
+    var Popup = function (opt) {
+    	this.options ={};
         this.defaultOptions ={
-                'id': 'defaultPopup',
-                'appendTo': 'body',
-                'html':''
-            };
-        this.init = function(opt){
-        	this.options = extend(this.defaultOptions, opt);
-            if(this.options.prependTo) {
-                delete this.options.appendTo;  
+            'id': 'defaultPopup',
+            'appendTo': 'body',
+            'html':''
+        };
+        var _that = this,
+        init = function(opt){
+        	_that.options = extend(_that.defaultOptions, opt);
+
+            if(_that.options.prependTo) {
+                delete _that.options.appendTo;  
             }
 
-            if(this.options.isAjax){
+            if(_that.options.isAjax){
                 
             }
-        };
-      	this.setOption = function(optionName, value) {
-            options[optionName] = value;
-        };
-        this.getOption = function(optionName) {
-            return options[optionName];
-        };
-        this.createNodeFromHTML = function(html) {
+        },
+      	setOption = function(optionName, value) {
+            _that.options[optionName] = value;
+        },
+        getOption = function(optionName) {
+            return _that.options[optionName];
+        },
+        createNodeFromHTML = function(html) {
             var myElement = document.createElement('div');
             myElement.setAttribute("id", getOption('id'));
             myElement.innerHTML = html;
         
             return myElement;
-        };
-        this.addByMethod = function(method) {
+        },
+        addByMethod = function(method) {
             var _this = this,
-            nodeElement = this.createNodeFromHTML(this.getOption('html'));
+            nodeElement = createNodeFromHTML(getOption('html'));
             switch(method){
                 case 'appendTo':
                     document.querySelector(getOption('appendTo')).appendChild(nodeElement);
@@ -67,13 +68,12 @@ var boldPopup = (function(){
                     elementToPrepend.insertBefore(nodeElement,elementToPrepend.childNodes[0]);
                     break;      
             }
-            this.setOption('added', true);
+            setOption('added', true);
+        },
+        Popup = function (options){
+    		init(options);
         };
-        this.Popup = function (options){
-    		_that.init(options);
-        };
-
-        this.Popup.prototype.show = function() {
+        Popup.prototype.show = function() {
             var _this= this,
                 // Jezeli nie prepend to na pewno append
                 method = (getOption('prependTo'))? 'prependTo' : 'appendTo';
@@ -84,26 +84,22 @@ var boldPopup = (function(){
 
         };
 
-        this.Popup.prototype.hide = function() {
+        Popup.prototype.hide = function() {
             var _this= this;
             if (getOption('added')) {
                     document.getElementById(getOption('id')).style.display = 'none';
             }
         };
         
-        this.Popup.prototype.remove = function() {
+        Popup.prototype.remove = function() {
             var _this= this;
             if (getOption('added')) {
                     document.getElementById(getOption('id')).remove();
                     setOption('added', false);
             }
         };
-        this.Popup.prototype.listOption = function() {
-            return _that.options;
-        };
-
-        return this.Popup;
-    }());
+        return new Popup(opt);
+    };
 
     return {
         create: popupFactory,
