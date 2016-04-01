@@ -2,6 +2,7 @@ var boldPopup = (function(){
     var instance = this,
         extend = boldExtend,
         popups ={},
+        preloaders =[],
 
     popupFactory = function (options) {
         var newTemplate = new Popup(options);
@@ -19,9 +20,39 @@ var boldPopup = (function(){
 
         return newTemplate;
     },
+    getPreloader = function(id){
+        return preloaders[id];
+    },
+    getPopup = function(idx){
+        return popups(name);
+    },
+    getPopupIndex = function(name){
+        return popups.indexOf(name);
+    },
+    createPreloader = function(){
+        var preloader = new Preloader();
 
-    getPopup = function(name){
-        return popups[name];
+        return preloader;
+    };
+    var Preload = function(showOn){
+        var showOn= showOn,
+        popupId = showOn + '-popup',
+        popupClass = 'boldPreloader',
+        show = function(){
+
+        }
+        remove = function(){
+            document.getElementById(popupId).remove();
+        } 
+        
+        if(getPopupIndex(id) == -1){
+        
+        }
+
+        return {
+            show: show,
+            remove: remove
+        }
     };
 
     var Popup = function (opt) {
@@ -104,6 +135,7 @@ var boldPopup = (function(){
     return {
         create: popupFactory,
         createByAjax: createByAjax,
+        preloader: createPreloader,
         get: getPopup,
         listPopups: popups
     };
