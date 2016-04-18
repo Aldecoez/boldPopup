@@ -2,7 +2,8 @@ var boldPopup = (function(){
     var instance = this,
         extend = boldExtend,
         popups ={},
-        preloaders =[],
+        preloaders = {},
+        preloaderCounter = 0,
 
     popupFactory = function (options) {
         var newTemplate = new Popup(options);
@@ -20,42 +21,116 @@ var boldPopup = (function(){
 
         return newTemplate;
     },
-    getPreloader = function(id){
-        return preloaders[id];
-    },
     getPopup = function(idx){
         return popups(name);
     },
     getPopupIndex = function(name){
         return popups.indexOf(name);
     },
-    createPreloader = function(){
-        var preloader = new Preloader();
-
+    getPreloader = function (id) {
+        if (typeof id !== "undefined") {
+            return preloaders[id];
+        }
+        return preloaders;
+    },
+    removePreloader = function (index) {
+        var item,
+            id = index;
+        if (!index) {
+            id = 'globalPreloader';
+        }
+        for (item in preloaders[id]) {
+            if (!preloaders[id].hasOwnProperty(item)) {
+                continue;
+            }
+            preloaders[id][item].remove();
+        }
+    },
+    chooseIndexVaraible = function (options) {
+        var indexVariable;
+        if (options.queueId) {
+            indexVariable = options.queueId;
+        } else if (options.preloaderId) {
+            indexVariable = options.preloaderId;
+        } else {
+            indexVariable = 'globalPreloader';
+        }
+        return indexVariable;
+    },
+    queuePreloader = function (options, preloader) {
+        var item,
+            indexVariable = chooseIndexVaraible(options);
+        preloaderCounter += 1;
+        if (!preloaders[indexVariable]) {
+            preloaders[indexVariable] = {};
+        }
+        for (item in preloaders[indexVariable]) {
+            if (!preloaders[indexVariable].hasOwnProperty(item)) {
+                continue;
+            }
+            if (preloaders[indexVariable][item].addedTo === options.addTo) {
+                return preloaders[indexVariable][item];
+            }
+        }
+        preloaders[indexVariable]['preloaderId-' + preloaderCounter] = preloader;
         return preloader;
-    };
-    var Preload = function(showOn){
-        var showOn= showOn,
-        popupId = showOn + '-popup',
-        popupClass = 'boldPreloader',
-        show = function(){
-
-        }
-        remove = function(){
-            document.getElementById(popupId).remove();
-        } 
-        
-        if(getPopupIndex(id) == -1){
-        
-        }
-
-        return {
-            show: show,
-            remove: remove
-        }
-    };
-
-    var Popup = function (opt) {
+    },
+    createNewPreloader = function (options) {
+        var newPL = new newPreloader(options);
+        return queuePreloader(options, newPL);
+    },
+	    newPreloader = function (opt) {
+	        var defaultOptions = {
+	                customclass: '',
+	                queueId: '',
+	                preloaderId: '',
+	                addTo: 'body',
+	                css: {}
+	            },
+	            added = false,
+	            options = {},
+	            counterStateWhenMade = preloaderCounter,
+	            preloaderNode,
+	            createPreloader = function () {
+	                preloaderNode = jQuery(document.createElement('div'))
+	                    .attr('id', 'preloaderId-' + counterStateWhenMade)
+	                    .addClass('preloader-wrapper-layer ' + options.class)
+	                    .css(options.css)
+	                    .append(jQuery(document.createElement('div')).addClass('preloader-image'));
+	                return preloaderNode;
+	            },
+	            show = function () {
+	                if (!added && !jQuery(options.addTo).find('.preloader-wrapper-layer').length) {
+	                    jQuery(options.addTo).append(createPreloader());
+	                    added = true;
+	                }
+	                else {
+	                    jQuery(preloaderNode).show();
+	                }
+	            },
+	            hide = function () {
+	                if (added) {
+	                    jQuery(preloaderNode).hide();
+	                }
+	            },
+	            remove = function () {
+	                var indexVariable = chooseIndexVaraible(options);
+	                if (added) {
+	                    hide();
+	                    jQuery(options.addTo).find(preloaderNode.attr('id')).remove();
+	                    added = false;
+	                }
+	                delete preloaders[indexVariable]['preloaderId-' + counterStateWhenMade];
+	            };
+	        options = jQuery.extend(defaultOptions, opt);
+	        return {
+	            show: show,
+	            hide: hide,
+	            remove: remove,
+	            addedTo: options.addTo
+	        }
+	    },
+        Popup = function (opt) {
     	this.options ={};
         this.defaultOptions ={
             'id': 'defaultPopup',
@@ -75,7 +150,7 @@ var boldPopup = (function(){
             }
         },
       	setOption = function(optionName, value) {
-            _that.options[optionName] = value;
+            _that.options[optionName] = value; 
         },
         getOption = function(optionName) {
             return _that.options[optionName];
@@ -135,7 +210,7 @@ var boldPopup = (function(){
     return {
         create: popupFactory,
         createByAjax: createByAjax,
-        preloader: createPreloader,
+        preloader: createNewPreloader,
         get: getPopup,
         listPopups: popups
     };
