@@ -25,6 +25,13 @@ var pop2 = boldPopup.create({
     'html': temp.getHTML()
 });
 boldDebug.show();
-document.querySelector("#startTheParty").onclick = function(){
-    pop.show();
+document.querySelector("#dd").onclick = function(){
+    var preloader = boldPopup.preloader({
+    'preloaderId':'ed',
+    'queueId': 'ddd',
+    'addTo': this,
+    'css': {
+    	'position': 'absolute'
+    }
+	}).show();
 }
